@@ -17,7 +17,7 @@ namespace API_PensionChat.Controllers
         /// </summary>
         /// <param name="u">l'utilisateur à ajouter</param>
         /// <returns>true si bien passé</returns>
-        [HttpPost("AddUser")]
+        [HttpPost("AddUtilisateurProprietaire")]
         public ActionResult AddUtilisateurProprietaire([FromBody] Utilisateur? u)
         {
             ActionResult result = BadRequest("Pas d'utilisateur spécifié");
@@ -36,7 +36,7 @@ namespace API_PensionChat.Controllers
         /// </summary>
         /// <param name="email">l'email de l'utilisateur à supprimer</param>
         /// <returns>true si bien passé</returns>
-        [HttpDelete("RemoveUser")]
+        [HttpDelete("RemoveUtilisateur")]
         public ActionResult RemoveUtilisateur(string email)
         {
             ActionResult result = BadRequest("Pas d'email spécifié");
