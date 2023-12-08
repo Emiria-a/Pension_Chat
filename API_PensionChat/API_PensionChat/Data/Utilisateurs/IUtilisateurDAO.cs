@@ -8,10 +8,17 @@ namespace API_PensionChat.Data.Utilisateurs
     public interface IUtilisateurDAO
     {
         /// <summary>
-        /// Ajoute un utilisateur dans la base de donnée
+        /// Ajoute un utilisateur à la base de données
         /// </summary>
-        /// <param name="u">Utilisateur à ajouter</param>
-        /// <returns>bool si bien passé</returns>
-        public bool AddUtilisateurProprioetaire(Utilisateur? u);
+        /// <param name="u">l'utilisateur à ajouter</param>
+        /// <returns>true si bien passé</returns>
+        public bool AddUtilisateurProprietaire(Utilisateur? u);
+
+        /// <summary>
+        /// Supprime un utilisateur de la base de données à partir de son email (unique)
+        /// </summary>
+        /// <param name="email">l'email de l'utilisateur à supprimer</param>
+        /// <returns>true si bien passé</returns>
+        public bool RemoveUtilisateurProprietaire(string email);
     }
 }

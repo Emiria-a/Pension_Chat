@@ -23,24 +23,50 @@ namespace API_PensionChat.Data.Utilisateurs
             conn.Open();
         }
 
-        public bool AddUtilisateur(Utilisateur? u)
+        public bool AddUtilisateurProprietaire(Utilisateur? u)
         {
             bool res = false;
            
             try
             {
-
                 if (conn.State == System.Data.ConnectionState.Closed)
                 {
                     conn.Open();
                 }
-                string insert = "INSERT INTO UTILISATEUR (Nom, Prenom, mail, Mdp, photo) VALUES (@Nom, @Prenom, @email, @mdp);";
+                string insert = "INSERT INTO UTILISATEUR (Pseudo, Email, MotDePasse, Role) VALUES (@pseudo, @email, @mdp, @role);";
                 using (MySqlCommand cmd = new MySqlCommand(insert, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Prenom", u.Pseudo);
+                    cmd.Parameters.AddWithValue("@pseudo", u.Pseudo);
                     cmd.Parameters.AddWithValue("@email", u.Email);
                     cmd.Parameters.AddWithValue("@mdp", u.MotDePasse);
-                    cmd.Parameters.AddWithValue("@photo", u.Role);
+                    cmd.Parameters.AddWithValue("@role", u.Role);
+
+                    cmd.ExecuteNonQuery();
+                }
+                res = true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return res;
+        }
+
+        public bool RemoveUtilisateurProprietaire(string email)
+        {
+            bool res = false;
+
+            try
+            {
+                if (conn.State == System.Data.ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string insert = "DELETE FROM UTILISATEUR WHERE Email = @email;";
+                using (MySqlCommand cmd = new MySqlCommand(insert, conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
 
                     cmd.ExecuteNonQuery();
                 }

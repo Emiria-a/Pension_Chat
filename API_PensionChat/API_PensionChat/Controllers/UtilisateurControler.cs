@@ -13,18 +13,37 @@ namespace API_PensionChat.Controllers
         public UtilisateurControler() { }
 
         /// <summary>
-        /// Ajoute un utilisateur dans la base de donnée
+        /// Ajoute un utilisateur à la base de données
         /// </summary>
-        /// <param name="u">Utilisateur à ajouter</param>
-        /// <returns>bool si bien passé</returns>
+        /// <param name="u">l'utilisateur à ajouter</param>
+        /// <returns>true si bien passé</returns>
         [HttpPost("AddUser")]
-        public ActionResult AddUtilisateurProprioetaire([FromBody] Utilisateur? u)
+        public ActionResult AddUtilisateurProprietaire([FromBody] Utilisateur? u)
         {
-            ActionResult result = BadRequest("Pas de user spécifié");
+            ActionResult result = BadRequest("Pas d'utilisateur spécifié");
             if (u != null)
             {
                 result = NotFound();
-                bool res = UtilisateurManager.Instance.AddUtilisateurProprioetaire(u);
+                bool res = UtilisateurManager.Instance.AddUtilisateurProprietaire(u);
+                if (res) result = Ok();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Supprime un utilisateur de la base de données à partir de son email (unique)
+        /// </summary>
+        /// <param name="email">l'email de l'utilisateur à supprimer</param>
+        /// <returns>true si bien passé</returns>
+        [HttpDelete("RemoveUser")]
+        public ActionResult RemoveUtilisateurProprietaire(string email)
+        {
+            ActionResult result = BadRequest("Pas d'email spécifié");
+            if (email != null)
+            {
+                result = NotFound();
+                bool res = UtilisateurManager.Instance.RemoveUtilisateurProprietaire(email);
                 if (res) result = Ok();
             }
 
