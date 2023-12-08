@@ -40,9 +40,9 @@ namespace API_PensionChat.Model.Managers
         /// </summary>
         /// <param name="email">l'email de l'utilisateur à supprimer</param>
         /// <returns>true si bien passé</returns>
-        public bool RemoveUtilisateurProprietaire(string email)
+        public bool RemoveUtilisateur(string email)
         {
-            return this.utilisateurDAO.RemoveUtilisateurProprietaire(email);
+            return this.utilisateurDAO.RemoveUtilisateur(email);
         }
     }
 }

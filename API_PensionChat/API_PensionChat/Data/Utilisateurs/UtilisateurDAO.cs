@@ -53,7 +53,7 @@ namespace API_PensionChat.Data.Utilisateurs
             return res;
         }
 
-        public bool RemoveUtilisateurProprietaire(string email)
+        public bool RemoveUtilisateur(string email)
         {
             bool res = false;
 

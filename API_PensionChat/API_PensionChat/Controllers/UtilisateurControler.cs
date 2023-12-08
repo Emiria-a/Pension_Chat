@@ -37,13 +37,13 @@ namespace API_PensionChat.Controllers
         /// <param name="email">l'email de l'utilisateur à supprimer</param>
         /// <returns>true si bien passé</returns>
         [HttpDelete("RemoveUser")]
-        public ActionResult RemoveUtilisateurProprietaire(string email)
+        public ActionResult RemoveUtilisateur(string email)
         {
             ActionResult result = BadRequest("Pas d'email spécifié");
             if (email != null)
             {
                 result = NotFound();
-                bool res = UtilisateurManager.Instance.RemoveUtilisateurProprietaire(email);
+                bool res = UtilisateurManager.Instance.RemoveUtilisateur(email);
                 if (res) result = Ok();
             }
 

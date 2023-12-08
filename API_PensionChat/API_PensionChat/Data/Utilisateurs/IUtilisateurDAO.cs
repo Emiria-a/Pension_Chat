@@ -19,6 +19,6 @@ namespace API_PensionChat.Data.Utilisateurs
         /// </summary>
         /// <param name="email">l'email de l'utilisateur à supprimer</param>
         /// <returns>true si bien passé</returns>
-        public bool RemoveUtilisateurProprietaire(string email);
+        public bool RemoveUtilisateur(string email);
     }
 }
