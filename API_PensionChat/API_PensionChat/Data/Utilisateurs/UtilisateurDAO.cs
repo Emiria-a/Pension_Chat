@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using API_PensionChat.Model;
+using MySql.Data.MySqlClient;
 
 namespace API_PensionChat.Data.Utilisateurs
 {
@@ -9,17 +10,48 @@ namespace API_PensionChat.Data.Utilisateurs
     {
         private MySqlConnection conn;
         private string myConnectionString;
-        
+
         /// <summary>
-        /// Constructeur de ParticipantDAO
+        /// Constructeur de UtilisateurDAO
         /// </summary>
         public UtilisateurDAO()
         {
-            myConnectionString = "server=SRV-IQ-SQL;uid=mg985197;" +
-                "pwd=mg985197noob;database=dressageresults";
+            myConnectionString = "server=srv-iq-etu;uid=iq1;" +
+                "pwd=iq1;database=pension_chat";
             conn = new MySqlConnection();
             conn.ConnectionString = myConnectionString;
             conn.Open();
+        }
+
+        public bool AddUtilisateur(Utilisateur? u)
+        {
+            bool res = false;
+           
+            try
+            {
+
+                if (conn.State == System.Data.ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string insert = "INSERT INTO UTILISATEUR (Nom, Prenom, mail, Mdp, photo) VALUES (@Nom, @Prenom, @email, @mdp);";
+                using (MySqlCommand cmd = new MySqlCommand(insert, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Prenom", u.Pseudo);
+                    cmd.Parameters.AddWithValue("@email", u.Email);
+                    cmd.Parameters.AddWithValue("@mdp", u.MotDePasse);
+                    cmd.Parameters.AddWithValue("@photo", u.Role);
+
+                    cmd.ExecuteNonQuery();
+                }
+                res = true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return res;
         }
     }
 }

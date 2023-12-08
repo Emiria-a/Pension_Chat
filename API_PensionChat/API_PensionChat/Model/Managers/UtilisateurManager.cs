@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using API_PensionChat.Data.Utilisateurs;
+using Microsoft.AspNetCore.Identity;
 
 namespace API_PensionChat.Model.Managers
 {
@@ -22,6 +23,16 @@ namespace API_PensionChat.Model.Managers
             }
         }
 
-        //private IUtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        private IUtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+
+        /// <summary>
+        /// Ajoute un utilisateur dans la base de donnée
+        /// </summary>
+        /// <param name="u">Utilisateur à ajouter</param>
+        /// <returns>bool si bien passé</returns>
+        public bool AddUtilisateurProprioetaire(Utilisateur? u)
+        {
+            return this.utilisateurDAO.AddUtilisateurProprioetaire(u);
+        }
     }
 }
