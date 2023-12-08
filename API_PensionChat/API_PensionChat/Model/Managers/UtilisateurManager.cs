@@ -44,5 +44,16 @@ namespace API_PensionChat.Model.Managers
         {
             return this.utilisateurDAO.RemoveUtilisateur(email);
         }
+
+        /// <summary>
+        /// Vérifie que l'utilisateur a bien un compte ET que c'est le bon email + mdp
+        /// </summary>
+        /// <param name="email">L'email de l'utilisateur</param>
+        /// <param name="mdp">Le mot de passe de l'utilisateur</param>
+        /// <returns>true si bien passé</returns>
+        public bool CheckUtilisateur(string email, string mdp)
+        {
+            return this.utilisateurDAO.CheckUtilisateur(email, mdp);
+        }
     }
 }

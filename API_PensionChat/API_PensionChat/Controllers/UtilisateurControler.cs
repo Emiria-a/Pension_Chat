@@ -49,5 +49,25 @@ namespace API_PensionChat.Controllers
 
             return result;
         }
+
+        /// <summary>
+        /// Vérifie que l'utilisateur a bien un compte ET que c'est le bon email + mdp
+        /// </summary>
+        /// <param name="email">L'email de l'utilisateur</param>
+        /// <param name="mdp">Le mot de passe de l'utilisateur</param>
+        /// <returns>true si bien passé</returns>
+        [HttpGet("CheckUtilisateur")]
+        public ActionResult CheckUtilisateur(string email, string mdp)
+        {
+            ActionResult result = BadRequest("Pas d'email ou de mdp spécifié");
+            if (email != null && mdp != null)
+            {
+                result = NotFound();
+                bool res = UtilisateurManager.Instance.CheckUtilisateur(email, mdp);
+                if (res) result = Ok();
+            }
+
+            return result;
+        }
     }
 }

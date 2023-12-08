@@ -79,5 +79,39 @@ namespace API_PensionChat.Data.Utilisateurs
 
             return res;
         }
+
+        public bool CheckUtilisateur(string email, string mdp)
+        {
+            bool res = false;
+
+            try
+            {
+                if (conn.State == System.Data.ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string insert = "SELECT * FROM UTILISATEUR WHERE Email = @email AND MotDePasse = @mdp;";
+                using (MySqlCommand cmd = new MySqlCommand(insert, conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@mdp", mdp);
+
+                    cmd.ExecuteNonQuery();
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        res = true;
+                    }
+                    rdr.Close();
+                }
+                
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return res;
+        }
     }
 }
