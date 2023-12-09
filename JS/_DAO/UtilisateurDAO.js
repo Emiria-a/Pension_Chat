@@ -32,19 +32,15 @@ class UtilisateurDAO
     
     let response = await fetch(req, {mode:"no-cors"});
 
-      let res;
-      let bool; 
-      if(response.ok )
-      {
-        let text = await response.text();
-        res = toString(text);
-        if (res == "true") {
-          bool = true;
-        }
-      else {
-          bool = false;
+    let bool = false; 
+    if(response.ok )
+    {
+      let text = await response.text();
+      let res = toString(text);
+      if (res == "true") {
+        bool = true;
       }
-      }
+    }
 
       return bool;
   }

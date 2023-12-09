@@ -22,8 +22,6 @@ function Check()
         // On vérifie que l'utilisateur n'existe pas déjà et on l'ajoute dans la bd
         if (inscription.checkInscription())
         {
-            // Affiche un message de confirmation
-            alert("Inscription réussie");
 
             // création d'un cookie qui stocke l'email de l'utilisateur
             //setCookie("email", utilisateur.Email, 40);
