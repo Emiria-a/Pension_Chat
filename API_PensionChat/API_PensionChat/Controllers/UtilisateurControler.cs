@@ -18,17 +18,15 @@ namespace API_PensionChat.Controllers
         /// <param name="u">l'utilisateur à ajouter</param>
         /// <returns>true si bien passé</returns>
         [HttpPost("AddUtilisateurProprietaire")]
-        public ActionResult AddUtilisateurProprietaire([FromBody] Utilisateur? u)
+        public bool AddUtilisateurProprietaire([FromBody] Utilisateur? u)
         {
-            ActionResult result = BadRequest("Pas d'utilisateur spécifié");
+            bool res = false;
             if (u != null)
             {
-                result = NotFound();
-                bool res = UtilisateurManager.Instance.AddUtilisateurProprietaire(u);
-                if (res) result = Ok();
+                res = UtilisateurManager.Instance.AddUtilisateurProprietaire(u);
             }
 
-            return result;
+            return res;
         }
 
         /// <summary>
@@ -37,17 +35,15 @@ namespace API_PensionChat.Controllers
         /// <param name="email">l'email de l'utilisateur à supprimer</param>
         /// <returns>true si bien passé</returns>
         [HttpDelete("RemoveUtilisateur")]
-        public ActionResult RemoveUtilisateur(string email)
+        public bool RemoveUtilisateur(string email)
         {
-            ActionResult result = BadRequest("Pas d'email spécifié");
+            bool res = false;
             if (email != null)
             {
-                result = NotFound();
-                bool res = UtilisateurManager.Instance.RemoveUtilisateur(email);
-                if (res) result = Ok();
+                res = UtilisateurManager.Instance.RemoveUtilisateur(email);
             }
 
-            return result;
+            return res;
         }
 
         /// <summary>
@@ -57,17 +53,15 @@ namespace API_PensionChat.Controllers
         /// <param name="mdp">Le mot de passe de l'utilisateur</param>
         /// <returns>true si bien passé</returns>
         [HttpGet("CheckUtilisateur")]
-        public ActionResult CheckUtilisateur(string email, string mdp)
+        public bool CheckUtilisateur(string email, string mdp)
         {
-            ActionResult result = BadRequest("Pas d'email ou de mdp spécifié");
+            bool res = false;
             if (email != null && mdp != null)
             {
-                result = NotFound();
-                bool res = UtilisateurManager.Instance.CheckUtilisateur(email, mdp);
-                if (res) result = Ok();
+                res = UtilisateurManager.Instance.CheckUtilisateur(email, mdp);
             }
 
-            return result;
+            return res;
         }
     }
 }

@@ -20,28 +20,22 @@ class Inscription
     get Mdp(){return this.user.Mdp; }
     get Role(){return this.user.Role; }
 
-    // Vérifie que l'utilisateur n'existe pas dans la bd
+    // Vérifie que l'utilisateur n'existe pas dans la bd et crée l'utilisateur
     // Sinon envoi un message d'erreur
-    // <autor>Emma Outor</autor>
-    async checkInscription(u)
+    async checkInscription()
     {
-        if (this.isValid())
+        let IDAO = new UtilisateurDAO();
+        let user = await IDAO.CheckUsersAPI(this.user.email, this.user.mdp);
+
+        if (user)
         {
-            let IDAO = new UserDAO();
-            let user = await IDAO.CheckUsersAPI(u.email, u.mdp);
-
-            if (user)
-            {
-                alert("L'utilisateur existe déjà");
-            }
-            else
-            {
-                // Envoi des informations dans la bd
-                let utilisateur = new Utilisateur(u.pseudo, u.email, u.mdp, u.role);
-                IDAO.AddUserAPI(utilisateur);
-                alert("Inscription réussie");
-            }
-
+            alert("L'utilisateur existe déjà");
+        }
+        else
+        {
+            // Envoi des informations dans la bd
+            IDAO.AddUserAPI(this.user);
+            alert("Inscription réussie");
         }
     }
 

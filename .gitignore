@@ -4,3 +4,7 @@
 *.pdb
 *.vsidx
 *.vsidx
+*.v2
+*.v2
+*.bin
+*.dll

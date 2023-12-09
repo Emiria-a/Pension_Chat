@@ -24,6 +24,7 @@ class UtilisateurDAO
 
   //Vérfie que l'utilisateur existe dans la bdd
   //Prend en paramètre le mail et le mot de passe de l'utilisateur
+  //Retourne true si l'utilisateur existe, false sinon
   async CheckUsersAPI(email, mdp) 
   {
     let req = "CheckUtilisateur?email=";
@@ -31,15 +32,21 @@ class UtilisateurDAO
     
     let response = await fetch(req, {mode:"no-cors"});
 
-    let bool = "false"; 
-    if(response.ok )
-    {
-      let text = await response.text();
-      let res = toString(text);
-      if (res == "true") { bool = true; }
-    }
+      let res;
+      let bool; 
+      if(response.ok )
+      {
+        let text = await response.text();
+        res = toString(text);
+        if (res == "true") {
+          bool = true;
+        }
+      else {
+          bool = false;
+      }
+      }
 
-    return bool;
+      return bool;
   }
 
 }    
