@@ -18,15 +18,17 @@ namespace API_PensionChat.Controllers
         /// <param name="u">l'utilisateur à ajouter</param>
         /// <returns>true si bien passé</returns>
         [HttpPost("AddUtilisateurProprietaire")]
-        public bool AddUtilisateurProprietaire([FromBody] Utilisateur? u)
+        public ActionResult AddUtilisateurProprietaire([FromBody] Utilisateur? u)
         {
-            bool res = false;
+            ActionResult result = BadRequest("Pas d'utilisateur spécifié");
             if (u != null)
             {
-                res = UtilisateurManager.Instance.AddUtilisateurProprietaire(u);
+                result = NotFound();
+                bool res = UtilisateurManager.Instance.AddUtilisateurProprietaire(u);
+                if (res) result = Ok();
             }
 
-            return res;
+            return result;
         }
 
         /// <summary>
@@ -35,15 +37,17 @@ namespace API_PensionChat.Controllers
         /// <param name="email">l'email de l'utilisateur à supprimer</param>
         /// <returns>true si bien passé</returns>
         [HttpDelete("RemoveUtilisateur")]
-        public bool RemoveUtilisateur(string email)
+        public ActionResult RemoveUtilisateur(string email)
         {
-            bool res = false;
+            ActionResult result = BadRequest("Pas d'email spécifié");
             if (email != null)
             {
-                res = UtilisateurManager.Instance.RemoveUtilisateur(email);
+                result = NotFound();
+                bool res = UtilisateurManager.Instance.RemoveUtilisateur(email);
+                if (res) result = Ok();
             }
 
-            return res;
+            return result;
         }
 
         /// <summary>

@@ -3,8 +3,13 @@
 *.dll
 *.pdb
 *.vsidx
-*.vsidx
-*.v2
 *.v2
 *.bin
 *.dll
+*.suo
+API_PensionChat/API_PensionChat/bin/Debug/net6.0/API_PensionChat.dll
+API_PensionChat/API_PensionChat/bin/Debug/net6.0/API_PensionChat.pdb
+API_PensionChat/API_PensionChat/obj/Debug/net6.0/API_PensionChat.dll
+API_PensionChat/API_PensionChat/obj/Debug/net6.0/API_PensionChat.pdb
+API_PensionChat/API_PensionChat/obj/Debug/net6.0/ref/API_PensionChat.dll
+API_PensionChat/API_PensionChat/obj/Debug/net6.0/refint/API_PensionChat.dll
