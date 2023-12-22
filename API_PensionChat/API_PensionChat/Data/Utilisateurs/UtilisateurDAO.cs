@@ -99,12 +99,79 @@ namespace API_PensionChat.Data.Utilisateurs
                     cmd.ExecuteNonQuery();
                     MySqlDataReader rdr = cmd.ExecuteReader();
                     while (rdr.Read())
-                    {
+                    { 
                         res = true;
                     }
                     rdr.Close();
                 }
                 
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return res;
+        }
+
+        public string CheckRole(string email)
+        {
+            string res = "";
+
+            try
+            {
+                if (conn.State == System.Data.ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string insert = "SELECT * FROM UTILISATEUR WHERE Email = @email";
+                using (MySqlCommand cmd = new MySqlCommand(insert, conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    cmd.ExecuteNonQuery();
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        res = rdr.GetString(rdr.GetOrdinal("Role"));
+                    }
+                    rdr.Close();
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return res;
+        }
+
+        
+        public bool CheckEmail(string email)
+        {
+            bool res = false;
+
+            try
+            {
+                if (conn.State == System.Data.ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string insert = "SELECT * FROM UTILISATEUR WHERE Email = @email";
+                using (MySqlCommand cmd = new MySqlCommand(insert, conn))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    cmd.ExecuteNonQuery();
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        res = true;
+                    }
+                    rdr.Close();
+                }
+
             }
             catch (MySqlException ex)
             {

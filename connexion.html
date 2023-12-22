@@ -3,10 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="CSS/general.css">
+    <link rel="stylesheet" type="text/css" href="CSS/inscription-connexion.css">
     <title>Connexion</title>
 </head>
 <body>
-    <h1>Connexion</h1>
-    
+    <!------------------------- Header ------------------------------------>
+    <header>
+        <div id="pagetop">
+
+            <a href="#index" title="Home">
+                <img id="logo" src="IMG/logo.png" alt="logo du site">
+            </a>
+            
+            <nav id="topnav">
+
+                <a href="inscription.html" title="S'inscrire">S'inscrire</a>
+
+                <a href="connexion.html" title="Se connecter">Se connecter</a>
+
+            </nav>
+        </div>
+    </header>
+
+    <!-------------------------------------- Page Content --------------------------------------------------->
+    <main>
+        <div class="title">
+            <h1>Connexion</h1>
+        </div>
+
+        <div class="connexion">
+            <form method="post" id="form">
+
+                <label for="email">Email</label><br>
+                <input type="email" placeholder="Entrez un email" name="email" id="email" required><br>
+
+                <label for="mdp">Mot de passe</label><br>
+                <input type="password" placeholder="Entrez un mot de passe" name="mdp" id="mdp" required><br>
+
+                <button type="button" id="inscription">Connexion</button>
+            </form>
+        </div>
+
+    </main>
+
+    <!--------------------------------------Footer--------------------------------------------------->
+    <footer>
+
+    </footer>
+
+    <!-------------------------------------- Script --------------------------------------------------->
+    <script src="JS/_Classes/Utilisateur.Objet.js"></script>
+
+    <script src="JS/_DAO/UtilisateurDAO.js"></script>
+
+    <script src="JS/Connexion/Programme.Connexion.js"></script>
 </body>
 </html>

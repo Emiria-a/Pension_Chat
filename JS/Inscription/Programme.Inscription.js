@@ -1,45 +1,54 @@
 
-// On crée les objets nécessaires
-let inscription = new Inscription();
-
-// On récupère les éléments du DOM
-let form = document.getElementById("form");
-
+// On crée un DAO pour communiquer avec l'API
+let UDAO = new UtilisateurDAO();
 
 
 // Se déclenche quand on clique sur le bouton "Inscription"
-function Check()
+async function Check()
 {
-    // On récupère les valeurs des champs
-    inscription.Pseudo = form.pseudo.value;
-    inscription.Email = form.email.value;
-    inscription.Mdp = form.mdp.value;
-    inscription.Role = "p";
+    // On récupère les éléments du formulaire
+    let form = document.getElementById("form");
 
     // si les champs sont valides
-    if (isValid())
+    if (isValid(form))
     {
-        // On vérifie que l'utilisateur n'existe pas déjà et on l'ajoute dans la bd
-        if (inscription.checkInscription())
+        // On crée un objet Utilisateur
+        let utilisateur = new Utilisateur(form.pseudo.value, form.email.value, form.mdp.value, "p");
+
+        // On vérifie que l'utilisateur n'existe pas et on l'ajoute dans la bd
+        if (!await UDAO.CheckEmailAPI(utilisateur.Email))
         {
-
-            // création d'un cookie qui stocke l'email de l'utilisateur
-            //setCookie("email", utilisateur.Email, 40);
-
-            // On redirige l'utilisateur vers la page de connexion
-            //window.location.href = "connexion.html";
+            // On ajoute l'utilisateur dans la bd
+            if(await UDAO.AddUserAPI(utilisateur))
+            {
+                alert("Inscription réussie");
+            }
+            else
+            {
+                alert("Erreur lors de l'inscription");
+            }
+            
         }
+        else
+        {
+            alert("Un utilisateur utilise déjà cet email");
+        }
+    }
+    else
+    {
+        alert("Veuillez remplir tous les champs");
     }
 }
 
 // Vérifie que les champs sont valides
-function isValid()
+// Prend en paramètre le formulaire
+// Retourne true si les champs sont valides, false sinon
+function isValid(form)
 {
     let valid = true;
 
-    if (form.pseudo.value == "" && form.email.value == "" & form.mdp.value == "")
+    if (form.pseudo.value == "" || form.email.value == "" || form.mdp.value == "")
     {
-        console.log("Veuillez remplir tous les champs");
         valid = false;
     }
 
@@ -48,7 +57,7 @@ function isValid()
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//                                      MAIN PROGRAM                                    //
+//                                   MAIN PROGRAM                                       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 

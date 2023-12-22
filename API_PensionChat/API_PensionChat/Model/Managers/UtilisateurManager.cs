@@ -5,9 +5,7 @@ namespace API_PensionChat.Model.Managers
 {
     public class UtilisateurManager
     {
-        private UtilisateurManager()
-        {
-        }
+        private UtilisateurManager() { }
 
         private static UtilisateurManager instance;
 
@@ -54,6 +52,26 @@ namespace API_PensionChat.Model.Managers
         public bool CheckUtilisateur(string email, string mdp)
         {
             return this.utilisateurDAO.CheckUtilisateur(email, mdp);
+        }
+
+        /// <summary>
+        /// Vérifie le rôle de l'utilisateur
+        /// </summary>
+        /// <param name="email">L'email de l'utilisateur</param>
+        /// <returns>Le rôle de l'utilisateur</returns>
+        public string CheckRole(string email)
+        {
+            return this.utilisateurDAO.CheckRole(email);
+        }
+
+        /// <summary>
+        /// Vérifie que l'email n'existe pas déjà dans la bdd
+        /// </summary>
+        /// <param name="email">L'email à vérifier</param>
+        /// <returns>true si existe</returns>
+        public bool CheckEmail(string email)
+        {
+            return this.utilisateurDAO.CheckEmail(email);
         }
     }
 }

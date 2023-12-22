@@ -18,17 +18,15 @@ namespace API_PensionChat.Controllers
         /// <param name="u">l'utilisateur à ajouter</param>
         /// <returns>true si bien passé</returns>
         [HttpPost("AddUtilisateurProprietaire")]
-        public ActionResult AddUtilisateurProprietaire([FromBody] Utilisateur? u)
+        public bool AddUtilisateurProprietaire([FromBody] Utilisateur? u)
         {
-            ActionResult result = BadRequest("Pas d'utilisateur spécifié");
+            bool res = false;
             if (u != null)
             {
-                result = NotFound();
-                bool res = UtilisateurManager.Instance.AddUtilisateurProprietaire(u);
-                if (res) result = Ok();
+                res = UtilisateurManager.Instance.AddUtilisateurProprietaire(u);
             }
 
-            return result;
+            return res;
         }
 
         /// <summary>
@@ -37,17 +35,15 @@ namespace API_PensionChat.Controllers
         /// <param name="email">l'email de l'utilisateur à supprimer</param>
         /// <returns>true si bien passé</returns>
         [HttpDelete("RemoveUtilisateur")]
-        public ActionResult RemoveUtilisateur(string email)
+        public bool RemoveUtilisateur(string email)
         {
-            ActionResult result = BadRequest("Pas d'email spécifié");
+            bool res = false;
             if (email != null)
             {
-                result = NotFound();
-                bool res = UtilisateurManager.Instance.RemoveUtilisateur(email);
-                if (res) result = Ok();
+                res = UtilisateurManager.Instance.RemoveUtilisateur(email);
             }
 
-            return result;
+            return res;
         }
 
         /// <summary>
@@ -63,6 +59,40 @@ namespace API_PensionChat.Controllers
             if (email != null && mdp != null)
             {
                 res = UtilisateurManager.Instance.CheckUtilisateur(email, mdp);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Vérifie le rôle de l'utilisateur
+        /// </summary>
+        /// <param name="email">L'email de l'utilisateur</param>
+        /// <returns>Le rôle de l'utilisateur</returns>
+        [HttpGet("CheckRole")]
+        public string CheckRole(string email)
+        {
+            string result = null;
+            if (email != null)
+            {
+                result = UtilisateurManager.Instance.CheckRole(email);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Vérifie que l'email n'existe pas déjà dans la bdd
+        /// </summary>
+        /// <param name="email">L'email à vérifier</param>
+        /// <returns>true si existe</returns>
+        [HttpGet("CheckEmail")]
+        public bool CheckEmail(string email)
+        {
+            bool res = false;
+            if (email != null)
+            {
+                res = UtilisateurManager.Instance.CheckEmail(email);
             }
 
             return res;

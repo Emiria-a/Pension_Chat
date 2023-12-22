@@ -28,5 +28,19 @@ namespace API_PensionChat.Data.Utilisateurs
         /// <param name="mdp">Le mot de passe de l'utilisateur</param>
         /// <returns>true si bien passé</returns>
         public bool CheckUtilisateur(string email, string mdp);
+
+        /// <summary>
+        /// Vérifie le rôle de l'utilisateur
+        /// </summary>
+        /// <param name="email">L'email de l'utilisateur</param>
+        /// <returns>Le rôle de l'utilisateur</returns>
+        public string CheckRole(string email);
+
+        /// <summary>
+        /// Vérifie que l'email n'existe pas déjà dans la bdd
+        /// </summary>
+        /// <param name="email">L'email à vérifier</param>
+        /// <returns>true si existe</returns>
+        public bool CheckEmail(string email);
     }
 }
