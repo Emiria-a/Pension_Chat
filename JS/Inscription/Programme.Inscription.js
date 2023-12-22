@@ -22,6 +22,9 @@ async function Check()
             if(await UDAO.AddUserAPI(utilisateur))
             {
                 alert("Inscription réussie");
+
+                // On redirige vers la page de connexion
+                window.location.href = "connexion.html";
             }
             else
             {

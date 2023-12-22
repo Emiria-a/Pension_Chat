@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aGl79TWTOBY5u2/dKxzegzvhGR4oUw9JV58lSVansmN5DHJe9Yk96UkGINsg2ZmMgOAc0K0Cq0fKJfiZohAwEQ==",
+  "dgSpecHash": "lx1mpkIelSvdylq+3trNiIcCF/FUpvZnMxuhZXSSBN2t5rDYuKh9hTPPCsZJ/dCH5UP4nO8YuFgEuv4LXka5Ow==",
   "success": true,
-  "projectFilePath": "D:\\Projet Pension Chat\\PensionChat\\API_PensionChat\\API_PensionChat\\API_PensionChat.csproj",
+  "projectFilePath": "D:\\Projet Pension Chat\\Pension_Chat\\API_PensionChat\\API_PensionChat\\API_PensionChat.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pipou\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\pipou\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
