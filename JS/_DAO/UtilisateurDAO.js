@@ -73,10 +73,9 @@ class UtilisateurDAO
     let response = await fetch(req, {mode:"no-cors"});
 
     let role = ""; 
-    if(response.ok )
+    if(response.status === 200)
     {
-      let text = await response.text();
-      role = toString(text);
+      role = await response.text();
     }
 
       return role;
